@@ -2,11 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { deleteResult } from '@/lib/calculate';
 
 export async function DELETE(
-  request: NextRequest,
-  { params }: { params: { id: string } }
+  _request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id);
+    const { id: idStr } = await params;
+    const id = parseInt(idStr);
 
     if (isNaN(id)) {
       return NextResponse.json(

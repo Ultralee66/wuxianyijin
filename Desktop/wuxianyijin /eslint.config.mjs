@@ -1,8 +1,12 @@
-const { FlatCompat } = require("@eslint/eslintrc");
-const path = require("path");
+import { FlatCompat } from "@eslint/eslintrc";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const compat = new FlatCompat({
-  baseDirectory: path.resolve(__dirname),
+  baseDirectory: __dirname,
 });
 
 const eslintConfig = [
@@ -12,4 +16,4 @@ const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 ];
 
-module.exports = eslintConfig;
+export default eslintConfig;
